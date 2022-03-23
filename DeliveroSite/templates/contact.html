@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<!--Meta Informations-->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Site Title-->
+	<title>Contact Us - Host-Pro</title>
+
+	<!--Favicons-->
+	<link rel="apple-touch-icon" sizes="60x60" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" href="{% static 'assets/favicon/favicon-32x32.png' %}" sizes="32x32">
+	<link rel="icon" type="image/png" href="{% static 'assets/favicon/favicon-16x16.png' %}" sizes="16x16">
+	<link rel="manifest" href="{% static 'assets/favicon/manifest.json' %}">
+	<link rel="mask-icon" href="{% static 'assets/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+	<link rel="shortcut icon" href="{% static 'assets/favicon/favicon.ico' %}">
+	<meta name="msapplication-config" content="{% static 'assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+
+	<!--Style Assets-->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/fontawesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/owl/owl.carousel.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/magnific/magnific-popup.css' %}">
+
+
+	<!--Theme Style-->
+	<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+
+</head>
+<body>
+
+<div id="page" class="site row">
+
+<h1 class="sr-only">Contact Us</h1>
+
+<header id="header" class="site-header">
+	<nav class="navbar navbar-defatult navbar-fixed-top fluid-navbar navbar-style1">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand"><img src="{% static 'assets/icons/sitelogo5.png' %}" alt="" class="logo-img"></a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                    <span class="sr-only">Nav Opener</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="navbar-nav nav navbar-right">
+                {% if request.session.Did  %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+                	<li><a href="{% url 'viewdrivertasks' %}">Tasks</a></li>
+					<li><a href="{% url 'aboutpage' %}">About</a></li>
+					<li  class="active"><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogout' %}">Logout</a></li>
+                {% else %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+					<li><a href="{% url 'aboutpage' %}">About</a></li>
+					<li  class="active"><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogin' %}">Login</a></li>
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+    </nav>
+	<!--Page Cover-->
+	<section class="row page-cover" data-slide="{% static 'assets/images/slide1.jpg' %}">
+	    <div class="container">
+	        <h2 class="this-title">Contact Us</h2>
+	        <ol class="breadcrumb">
+	            <li><a href="index.html">Home</a></li>
+                <li class="active">Contact Us</li>
+	        </ol>
+	    </div>
+	</section>
+</header>
+
+<main id="contents" class="site-contnts">
+    <!--404 Contents-->
+	<section class="row contact-form-section">
+
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-sm-6 contact-form-box contact-box">
+                    <h2 class="cb-title"><strong>Contact Us</strong></h2>
+<!--                    <p>Simply complete the inquiry form or send us an <u>email.</u></p>-->
+                    <form id="contactForm" method="post" class="contact-form" action="{% url 'sendmessage' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" placeholder="Full name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" placeholder="Email address" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="10" class="form-control" placeholder="Enter text here " style="height:100px;"></textarea>
+                        </div>
+                        <input type="submit" value="send message" class="btn btn-primary">
+                    </form>
+	            </div>
+<!--	            <div class="col-sm-6 contact-info-box contact-box">-->
+<!--                    <div class="row contact-ibox">-->
+<!--                        <h2 class="cb-title">Contact <strong>Info</strong></h2>-->
+<!--                        <p>Here is the information &amp; contacts you can apply.</p>-->
+<!--                        <ul class="media-list contact-infolist">-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion1.png' %}" alt="Contact Icon 1"></span></div>-->
+<!--                                <div class="media-body">301 Neymer Road, Glassgow, opposite of denclave zone, WA 1201-403.</div>-->
+<!--                            </li>-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion2.png' %}" alt="Contact Icon 2"></span></div>-->
+<!--                                <div class="media-body"><a href="tel:+11234567890">+1 123 456 7890</a></div>-->
+<!--                            </li>-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion3.png' %}" alt="Contact Icon 3"></span></div>-->
+<!--                                <div class="media-body"><a href="tel:+11234567890">+1 123 456 7890</a></div>-->
+<!--                            </li>-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion4.png' %}" alt="Contact Icon 4"></span></div>-->
+<!--                                <div class="media-body"><a href="mailto:info@bootstrapmart.com">info@bootstrapmart.com</a></div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="row contact-ibox">-->
+<!--                        <h2 class="cb-title">We also <strong>Support</strong></h2>-->
+<!--                        <ul class="media-list contact-infolist">-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion5.png' %}" alt="Contact Icon 1"></span></div>-->
+<!--                                <div class="media-body"><a href="#">Chat Support</a></div>-->
+<!--                            </li>-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion6.png' %}" alt="Contact Icon 2"></span></div>-->
+<!--                                <div class="media-body"><a href="#">Support Ticket</a></div>-->
+<!--                            </li>-->
+<!--                            <li class="media">-->
+<!--                                <div class="media-left"><span class="media-object"><img src="{% static 'assets/icons/cion4.png' %}" alt="Contact Icon 4"></span></div>-->
+<!--                                <div class="media-body"><a href="#">Email Support</a></div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--	            </div>-->
+	        </div>
+	    </div>
+	</section>
+</main>
+
+
+<footer id="footer" class="site-footer">
+    <section class="row site-footer-top">
+        <div class="container" align="center">
+            <div class="row">
+                <div class="media">
+                    <div class="col-sm-3 media-left" >
+                        <a href="index.html" class="media-object"><img src="{% static 'assets/icons/sitelogo5.png' %}" alt="HostPro Logo">&copy; 2021</a>
+                    </div>
+<!--                    <div class="col-sm-9 media-body">-->
+<!--                        <p>All Rights Reserved by HostPro. Designed and Developed by <a href="https://bootstrapmart.com/">BootstrapMart</a></p>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'vendors/jquery-2.2.0.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendors/owl/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendors/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script src="{% static 'vendors/magnific/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'vendors/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'vendors/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'vendors/form-validator/jquery.form.js' %}"></script>
+<script src="{% static 'vendors/form-validator/jquery.validate.min.js' %}"></script>
+<!--Google Map-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTI1BZJKFCeJ8g9O01CMZ4QvVCfdPYkrE"></script>-->
+<!--<script src="{% static 'vendors/gmaps.min.js' %}"></script>-->
+<!--<script src="{% static 'assets/js/contact.js' %}"></script>-->
+<!--Theme JS-->
+<script src="{% static 'assets/js/hostpro.js' %}"></script>
+</body>
+</html>

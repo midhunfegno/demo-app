@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-block">
+                <h4 class="sub-title">Registration Details</h4>
+                <form id="adminreg" action="{% url 'saveregister' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Age</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Age">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10">
+                            <textarea rows="5" cols="5" class="form-control" name="Address" style="height:50px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Mobile no</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Mobno">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Upload Photo</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" name="Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary waves-effect waves-light" style="width:200px;">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <script>
+    jQuery.validator.addMethod("accept", function(value, element, param) {
+            return value.match(new RegExp("^" + param + "$"));
+          },'please enter a valid email')
+    jQuery.validator.addMethod("accept1", function(value, element, param) {
+            return value.match(new RegExp("^" + param + "$"));
+          },'please enter a valid PhoneNumber')
+    jQuery.validator.addMethod('lettersonly', function(value, element) {
+    return this.optional(element) || /^[a-z áãâäàéêëèíîïìóõôöòúûüùçñ]+$/i.test(value);
+}, "Letters and spaces only please");
+
+      $("#adminreg").validate({
+            normalizer: function(value) {
+                return $.trim(value);
+            },
+            rules:{
+              Name:{
+                required: true,
+                minlength:3,
+                lettersonly:true
+                },
+              Age:{
+                required: true,
+                minlength: 1,
+                maxlength: 3,
+                text : false
+                },
+              Address:{
+                required: true,
+                minlength:10
+                },
+              Email:{
+                required: true,
+                accept:"[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}"
+                },
+              Username:{
+                required: true,
+                minlength:5
+                },
+              Password:{
+                required: true,
+                minlength:5
+                },
+              Mobno:{
+                required: true,
+                minlength: 9,
+                maxlength: 10,
+                accept1:"[6-9]{1}[0-9]{9}",
+                number: true
+                },
+              Photo:{
+                required:true
+                },
+<!--              custid:{-->
+<!--                required: true,-->
+<!--                minlength:10-->
+<!--                },-->
+              },
+});
+</script>
+
+</body>
+</html>
+
+
+{% endblock %}

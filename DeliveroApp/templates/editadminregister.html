@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="page-header">
+                          <div class="page-block" >
+                              <div class="row align-items-center" style="height:1px">
+                                  <div class="col-md-8">
+                                      <div class="page-header-title">
+                                          <h5 class="m-b-10">Update Registration Details</h5>
+<!--                                          <p class="m-b-0">Welcome to Mega Able</p>-->
+                                      </div>
+                                  </div>
+<!--                                  <div class="col-md-4">-->
+<!--                                      <ul class="breadcrumb-title">-->
+<!--                                          <li class="breadcrumb-item">-->
+<!--                                              <a href="index.html"> <i class="fa fa-home"></i> </a>-->
+<!--                                          </li>-->
+<!--                                          <li class="breadcrumb-item"><a href="#!">Admin</a>-->
+<!--                                          </li><li class="breadcrumb-item"><a href="#!">View Registered Admins</a>-->
+<!--                                          </li>-->
+
+<!--                                      </ul>-->
+<!--                                  </div>-->
+                              </div>
+                          </div>
+                      </div>
+
+ <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-block">
+<!--                <h4 class="sub-title">Update Registration Details</h4>-->
+                <form action="{% url 'updateadmin' dataid=data.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Name" value="{{ data.names }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Age</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Age" value="{{ data.age }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10">
+                            <textarea rows="5" cols="5" class="form-control" name="Address" >{{ data.address }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Email" value="{{ data.email }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Mobile no</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Mobno" value="{{ data.mobno }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Username" value="{{ data.username }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Password" value="{{ data.password }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Upload Photo</label>
+                        <div class="col-sm-10">
+                            <img src="{{ data.photo.url }}" width="100" height="100">
+                            <input type="file" class="form-control" name="Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary waves-effect waves-light">Update</button>
+                        </div>
+                    </div>
+
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+</body>
+</html>

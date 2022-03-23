@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block content %}
+{% for da in data %}
+<br>
+<br>
+<table>
+<tr><th><h1>Task Details</h1></th></tr>
+<tr><td>Preference Number :</td><td>{{da.Preferenceno}}</td></tr>
+<tr><td>Status :</td><td>{{da.Status}}</td></tr>
+<tr><td>Order ID :</td><td>{{da.Orderid}}</td></tr>
+<tr><td>Invoice Number :</td><td>{{da.Invoiceno}}</td></tr>
+<tr><td>Product Code :</td><td>{{da.Productcode}}</td></tr>
+<tr><td>Driver Code :</td><td>{{da.Drivercode}}</td></tr>
+<tr><td>Customer Mobile Number :</td><td>{{da.Custmob}}</td></tr>
+<tr><td>Customer Name :</td><td>{{da.Custname}}</td></tr>
+<tr><td>Shipping Name :</td><td>{{da.Shippingname}}</td></tr>
+<tr><td>Client Name :</td><td>{{da.Clientname}}</td></tr>
+<tr><td>District :</td><td>{{da.District}}</td></tr>
+<tr><td>Customer Address :</td><td>{{da.Custaddress}}</td></tr>
+<tr><td>Pincode :</td><td>{{da.Pincode}}</td></tr>
+<tr><td>Alternate Contact Number :</td><td>{{da.Altmobno}}</td></tr>
+
+<!--<tr><td>Latitude :</td><td>{{da.Lattitude}}</td></tr>-->
+<!--<tr><td>Longitude :</td><td>{{da.Longitude}}</td></tr>-->
+</table>
+{% endfor %}
+{% endblock %}

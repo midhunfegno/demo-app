@@ -1,0 +1,70 @@
+{%extends 'webindex.html' %}
+{% load static %}
+{% block content %}
+{% for da in data %}
+<section class="row pricing-tabs-section">
+    <div class="container">
+        <div class="row section-title text-center"></div>
+            <div class="tab-content pricing-tab-contents">
+                <div role="tabpanel" class="tab-pane active fade in" id="pricing-tab1">
+                <div class="row">
+                    <div class="col-sm-4 pricing-plan green">
+                        <div class="pp-inner row">
+                            <h2 class="h4 pp-title">{{da.Productcode}}</h2>
+                            <ul class="nav pp-list">
+                                <li ><strong>Preference Number :</strong>{{da.Preferenceno}}</li>
+                                <li><strong>Order ID :</strong>{{da.Orderid}}</li>
+                                <li><strong>Invoice Number :</strong>{{da.Invoiceno}}</li>
+                                <li><strong>Customer Name :</strong>{{da.Custname}}</li>
+                                <li><strong>Shipping Name :</strong>{{da.Shippingname}}</li>
+                                <li><strong>District :</strong>{{da.District}}</li>
+                                <li><strong>Customer Address :</strong>{{da.Custaddress}}</li>
+                                <li><strong>Pincode :</strong>{{da.Pincode}}</li>
+                                <li><strong>Contact Number :</strong>{{da.Custmob}}</li>
+                                <li><strong>Alternate Contact Number :</strong>{{da.Altmobno}}</li>
+<!--                            <li><strong>Status :</strong>{{da.Status}}</li>-->
+<!--                            <li><strong>Latitude :</strong>{{da.Lattitude}}</li>-->
+<!--                            <li><strong>Longitude :</strong>{{da.Longitude}}</li>-->
+<!--                            <li><strong>Product Code :</strong>{{da.Productcode}}</li>-->
+<!--                            <li><strong>Driver Code :</strong>{{da.Drivercode}}</li>-->
+                            </ul>
+                            <div class="media hst-plan-price">
+                                <div class="media-body">
+                                    <form action="{% url 'updatedelivered' %}" method="POST" >
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{da.Drivercode}}" name="Drivercode">
+                                        <input type="hidden" value="{{da.Preferenceno}}" name="Preferenceno">
+                                        <input type="hidden" value="{{da.Orderid}}" name="Orderid">
+                                        <input type="hidden" value="{{da.Invoiceno}}" name="Invoiceno">
+                                        <input type="hidden" value="{{da.Custname}}" name="Custname">
+                                        <input type="hidden" value="{{da.Shippingname}}" name="Shippingname">
+                                        <input type="hidden" value="{{da.District}}" name="District">
+                                        <input type="hidden" value="{{da.Custaddress}}" name="Custaddress">
+                                        <input type="hidden" value="{{da.Pincode}}" name="Pincode">
+                                        <input type="hidden" value="{{da.Custmob}}" name="Custmob">
+                                        <input type="hidden" value="{{da.Altmobno}}" name="Altmobno">
+                                        <input type="hidden" value="{{da.Productcode}}" name="ProductCode">
+                                        <input type="hidden" value="{{da.userid}}" name="Userid">
+                                        <input type="hidden" value="{{da.status}}" name="Status">
+                                        <button type="submit" class="btn btn-default" style="width:315px;font-size:22px;font-family:Times New Roman;" >Delivered</button>
+                                    </form>
+                                    <form action="{% url 'returndelivered' taskid=da.id %}" method="POST" >
+                                        {% csrf_token %}
+                                    <button type="submit" class="btn btn-default" style="background-color: #f44336;width:315px;font-size:22px;font-family:Times New Roman;">Return</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+<!--                    modal starts here-->
+
+<!--                    modal ends here-->
+                </div>
+            </div>
+    </div>
+</section>
+{% endfor %}
+{% endblock %}
+

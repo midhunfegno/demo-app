@@ -1,0 +1,99 @@
+{% extends 'webindex.html' %}
+{% block content %}
+{% load static %}
+<header id="header" class="site-header">
+	<nav class="navbar navbar-defatult navbar-fixed-top fluid-navbar navbar-style1">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand"><img src="{% static 'assets/icons/logo-white.png' %}" alt="" class="logo-img"></a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                    <span class="sr-only">Nav Opener</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="navbar-nav nav navbar-right">
+                {% if request.session.Did  %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+                	<li><a href="{% url 'viewdrivertasks' %}">Tasks</a></li>
+					<li><a href="{% url 'aboutpage' %}">About</a></li>
+					<li  class="active"><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogout' %}">Logout</a></li>
+                {% else %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+					<li><a href="{% url 'aboutpage' %}">About</a></li>
+					<li  class="active"><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogin' %}">Login</a></li>
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+    </nav>
+	<!--Page Cover-->
+	<section class="row page-cover" data-slide="{% static 'assets/images/slide1.jpg' %}">
+	    <div class="container">
+	        <h2 class="this-title">Return</h2>
+	        <ol class="breadcrumb">
+	            <li><a href="index.html">Home</a></li>
+                <li class="active">Contact Us</li>
+	        </ol>
+	    </div>
+	</section>
+</header>
+
+
+	<section class="row contact-form-section">
+        {% for da in data %}
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-sm-6 contact-form-box contact-box">
+<!--                    <h2 class="cb-title"><strong>Contact Us</strong></h2>-->
+<!--                    <p>Simply complete the inquiry form or send us an <u>email.</u></p>-->
+                       <form action="{% url 'approvereturn' %}" method="post">
+                           {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Product Code</label>
+                            <input type="text" value="{{da.Productcode}}" name="Productcode"  class="form-control" readonly="true">
+                        </div>
+                           <div class="form-group">
+                            <label>Order ID</label>
+                            <input type="text" name="Orderid" value="{{da.Orderid}}"  class="form-control" readonly="true">
+                        </div>
+                           <div class="form-group">
+                            <label>Invoice no</label>
+                            <input type="text" name="Invoiceno" value="{{da.Invoiceno}}" class="form-control" readonly="true">
+                        </div>
+                           <div class="form-group">
+                            <label>Customer Name</label>
+                            <input type="text" name="Custname" value="{{da.Custname}}" class="form-control" readonly="true">
+                        </div>
+                           <div class="form-group">
+                            <label>Customer Address</label>
+                            <input type="text" name="Custaddress" value="{{da.Custaddress}}" class="form-control" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Customer Number</label>
+                            <input type="text" name="Custmob" value="{{da.Custmob}}" class="form-control" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label>Reason</label>
+                            <textarea name="Reason" rows="10" class="form-control" placeholder="Enter text here " style="height:100px;"></textarea>
+                            <input type="hidden" value="{{da.Preferenceno}}" name="Preferenceno">
+                            <input type="hidden" value="{{da.Shippingname}}" name="Shippingname">
+                            <input type="hidden" value="{{da.District}}" name="District">
+                            <input type="hidden" value="{{da.Altmobno}}" name="Altmobno">
+                            <input type="hidden" value="{{da.Drivercode}}" name="Drivercode">
+                            <input type="hidden" value="{{da.Pincode}}" name="Pincode">
+                            <input type="hidden" value="{{da.userid}}" name="userid">
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+	            </div>
+	        </div>
+	    </div>
+        {% endfor %}
+	</section>
+{% endblock %}

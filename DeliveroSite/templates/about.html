@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<!--Meta Informations-->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Site Title-->
+	<title>Contact Us - Host-Pro</title>
+
+	<!--Favicons-->
+	<link rel="apple-touch-icon" sizes="60x60" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" href="{% static 'assets/favicon/favicon-32x32.png' %}" sizes="32x32">
+	<link rel="icon" type="image/png" href="{% static 'assets/favicon/favicon-16x16.png' %}" sizes="16x16">
+	<link rel="manifest" href="{% static 'assets/favicon/manifest.json' %}">
+	<link rel="mask-icon" href="{% static 'assets/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+	<link rel="shortcut icon" href="{% static 'assets/favicon/favicon.ico' %}">
+	<meta name="msapplication-config" content="{% static 'assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+
+	<!--Style Assets-->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/fontawesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/owl/owl.carousel.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/magnific/magnific-popup.css' %}">
+
+
+	<!--Theme Style-->
+	<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+
+</head>
+<header id="header" class="site-header">
+
+	<nav class="navbar navbar-defatult navbar-fixed-top fluid-navbar navbar-style1 affix-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand"><img src="{% static 'assets/icons/sitelogo5.png' %}" alt="" class="logo-img"></a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                    <span class="sr-only">Nav Opener</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="navbar-nav nav navbar-right">
+					{% if request.session.Did  %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+                    <li><a href="{% url 'viewdrivertasks' %}">Tasks</a></li>
+					<li class="active"><a href="{% url 'aboutpage' %}">About</a></li>
+					<li><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogout' %}">Logout</a></li>
+					{% else %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+					<li class="active"><a href="{% url 'aboutpage' %}">About</a></li>
+					<li><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogin' %}">Login</a></li>
+					{% endif %}
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+	<!--Page Cover-->
+	<section class="row page-cover" data-slide="{% static 'assets/images/slide1.jpg' %}" style="background-image: url({% static 'assets/images/slide1.jpg' %});height:300px;">
+	    <div class="container">
+	        <h2 class="this-title">About Us</h2>
+	        <ol class="breadcrumb">
+	            <li><a href="{% url 'sitehomepage' %}">Home</a></li>
+                <li class="active">About Us</li>
+	        </ol>
+	    </div>
+	</section>
+
+</header>
+
+<body>
+    <section class="row why-choose-us">
+        <div class="container">
+            <div class="row section-title text-center">
+				<h2>About Us</h2>
+				<p>Delivery is the process of transporting goods from a source location to a predefined destination.
+                Delivero is transforming the way people think about  delivery by offering fast,
+               transparent and reliable delivery to Customers.</p>
+			</div>
+           <div class="row">
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center">
+                       <div class="row wtc-icon"><img src="{% static 'assets/icons/wc1.png' %}" alt="HostPro Service Icon"></div>
+                       <h2 class="h4 wtc-title">Client Value</h2>
+                       <p>Long-Term Money Savings</p>
+<!--                       <a href="#" class="wtc-read-more">Read More</a>-->
+                   </div>
+               </div>
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center">
+                       <div class="row wtc-icon"><img src="{% static 'assets/icons/wc2.png' %}" alt="HostPro Service Icon"></div>
+                       <h2 class="h4 wtc-title">Reliable Service</h2>
+                       <p>Provides reliable services</p>
+<!--                       <a href="#" class="wtc-read-more">Read More</a>-->
+                   </div>
+               </div>
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center">
+                       <div class="row wtc-icon"><img src="{% static 'assets/icons/wc3.png' %}" alt="HostPro Service Icon"></div>
+                       <h2 class="h4 wtc-title">Innovate at Work</h2>
+                       <p>Fast and Innovative work</p>
+<!--                       <a href="#" class="wtc-read-more">Read More</a>-->
+                   </div>
+               </div>
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center">
+                       <div class="row wtc-icon"><img src="{% static 'assets/icons/wc4.png' %}" alt="HostPro Service Icon"></div>
+                       <h2 class="h4 wtc-title">Fast Retrieval</h2>
+                       <p> Get fast Updates on Incoming Deliveries</p>
+<!--                       <a href="#" class="wtc-read-more">Read More</a>-->
+                   </div>
+               </div>
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center">
+                       <div class="row wtc-icon"><img src="{% static 'assets/icons/wc5.png' %}" alt="HostPro Service Icon"></div>
+                       <h2 class="h4 wtc-title">Real Time</h2>
+                       <p> Information on Drivers in Real-time</p>
+<!--                       <a href="#" class="wtc-read-more">Read More</a>-->
+                   </div>
+               </div>
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center">
+                       <div class="row wtc-icon"><img src="{% static 'assets/icons/wc6.png' %}" alt="HostPro Service Icon"></div>
+                       <h2 class="h4 wtc-title">Communication</h2>
+                       <p>Improved Communication with Everyone</p>
+<!--                       <a href="#" class="wtc-read-more">Read More</a>-->
+                   </div>
+               </div>
+           </div>
+        </div>
+    </section>
+<footer id="footer" class="site-footer">
+    <section class="row site-footer-top">
+        <div class="container" align="center">
+            <div class="row">
+                <div class="media">
+                    <div class="col-sm-3 media-left" >
+                        <a href="index.html" class="media-object"><img src="{% static 'assets/icons/sitelogo5.png' %}" alt="HostPro Logo">&copy; 2021</a>
+                    </div>
+<!--                    <div class="col-sm-9 media-body">-->
+<!--                        <p>All Rights Reserved by HostPro. Designed and Developed by <a href="https://bootstrapmart.com/">BootstrapMart</a></p>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+</body>
+</html>

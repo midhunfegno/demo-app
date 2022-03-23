@@ -1,0 +1,71 @@
+{% extends 'webindex.html' %}
+{% block content %}
+{% load static %}
+
+
+<header id="header" class="site-header">
+	<nav class="navbar navbar-defatult navbar-fixed-top fluid-navbar navbar-style1">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="" class="navbar-brand"><img src="{% static 'assets/icons/logo-white.png' %}" alt="" class="logo-img"></a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                    <span class="sr-only">Nav Opener</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="navbar-nav nav navbar-right">
+                {% if request.session.Did  %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+                	<li  class="active"><a href="{% url 'viewdrivertasks' %}">Tasks</a></li>
+					<li><a href="{% url 'aboutpage' %}">About</a></li>
+					<li><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogout' %}">Logout</a></li>
+                {% else %}
+					<li><a href="{% url 'sitehomepage'%}">Home</a></li>
+					<li><a href="{% url 'aboutpage' %}">About</a></li>
+					<li><a href="{% url 'contactpage' %}">Contact</a></li>
+					<li><a href="{% url 'driverlogin' %}">Login</a></li>
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+    </nav>
+	<!--Page Cover-->
+	<section class="row page-cover" data-slide="{% static 'assets/images/slide1.jpg' %}">
+	    <div class="container">
+	        <h2 class="this-title">View Tasks</h2>
+	        <ol class="breadcrumb">
+	            <li><a href="index.html">Home</a></li>
+                <li class="active">View Tasks</li>
+	        </ol>
+	    </div>
+	</section>
+</header>
+
+<section class="row why-choose-us">
+        <div class="container">
+<!--            <div class="row section-title text-center">-->
+<!--				<h2>View Tasks</h2>-->
+<!--&lt;!&ndash;				<p>It has survived not only five centuries, but also the leap into electronic typesetting.</p>&ndash;&gt;-->
+<!--			</div>-->
+           <div class="row">
+               {% for d in data %}
+               <div class="col-sm-6 col-md-4 why-to-choose">
+                   <div class="row wtc-inner text-center" style="height:180px;">
+                       <div class="row wtc-icon">
+                           <img src="{% static 'assets/icons/wc21.png' %}" alt="HostPro Service Icon">
+                       </div>
+                       <h2 class="h4 wtc-title">{{d.Productcode}}</h2>
+                   </div>
+                       <div>
+                    <center><a href="{% url 'viewtaskdet' taskid=d.id %}" class="btn btn-primary" style="width:362px;">Read More</a></center>
+                       </div>
+               </div>
+                {% endfor %}
+           </div>
+        </div>
+    </section>
+{% endblock %}

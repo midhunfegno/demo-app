@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+   <div class="page-header">
+       <div class="page-block">
+           <div class="row align-items-center">
+               <div class="col-md-8">
+                   <div class="page-header-title">
+                       <h5 class="m-b-10">View Tasks</h5>
+<!--                    <p class="m-b-0">Welcome to Mega Able</p>-->
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <ul class="breadcrumb-title">
+                       <li class="breadcrumb-item">
+                           <a href="index.html"> <i class="fa fa-home"></i> </a>
+                       </li>
+                       <li class="breadcrumb-item"><a href="#!">Admin</a>
+                       </li><li class="breadcrumb-item"><a href="#!">View Tasks</a>
+                   </li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+   </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" style="width:100%;">
+                <thead>
+                 <tr>
+                    <th>Preference No</th>
+                    <th>Order ID</th>
+                    <th>Invoice No</th>
+                    <th>Product Code</th>
+                    <th>Driver Code</th>
+                    <th>Customer Mobile</th>
+                    <th>Customer Name</th>
+<!--                <th>Username</th>-->
+                    <th>Shipping Name</th>
+                    <th>Action</th>
+                    <th>Delete</th>
+                 </tr>
+                </thead>
+                <tbody>
+                      {% for da in data %}
+                    <tr>
+                     <td>{{da.Preferenceno}}
+                         <button type="button" class="btn btn-success datareference" data-idref="{{da.id}}" data-toggle="modal" data-target="#modal-success">
+                           Change
+                        </button>
+                     </td>
+                     <td>{{da.Orderid}}</td>
+                     <td>{{da.Invoiceno}}</td>
+                     <td>{{da.Productcode}}</td>
+                     <td>{{da.Drivercode}}
+                      <button type="submit" class="btn btn-success driverChangebtn" data-id="{{da.id}}" data-toggle="modal" data-target="#driverChangeModel">
+                     Change
+                      </button>
+                     </td>
+                     <td>{{da.Custmob}}</td>
+                     <td>{{da.Custname}}</td>
+<!--                    <td>{{da.username}}</td>-->
+                     <td>{{da.Shippingname}}</td>
+                     <td>
+                        <form action="{% url 'viewmoretask' dataid=da.id %}" method="POST">
+                        {% csrf_token %}
+<!--                        <button type="submit" style="background-color:rgb(0, 102, 255); color:white">VIEW</button>-->
+                            <button class="btn btn-info btn-round waves-effect waves-light" type="submit">View</button>
+                        </form>
+                     </td>
+                     <td>
+                    <form action="{% url 'deletetask' dataid=da.id %}" method="POST">
+                    {% csrf_token %}
+                <!--        <button type="submit" style="background-color:red; color:white">DELETE</button>-->
+                        <button class="btn btn-danger btn-round waves-effect waves-light" type="submit">Delete</button>
+                    </form>
+                     </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+    <!-- Modal Preference Number -->
+    <div class="modal fade" id="modal-success">
+        <div class="modal-dialog">
+            <div class="modal-content bg-success">
+                <div class="modal-header">
+                    <h4 class="modal-title">Change PreferenceNumber</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="preference-change" role="form" action="{% url 'change_preferencenumber' %}">
+                        {% csrf_token %}
+                        <input type="hidden" value="" id="edittaskid1" name="edittaskid1">
+                        <input type="text" class="form-controltextinput_css" id="Preferenceno" name="Preference_Number" placeholder="Enter Preference Number" >
+
+                </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+          <input type="submit" value="submit">
+        </div>
+                </form>
+      </div>
+    </div>
+  </div>
+  <!-- /.modal -->
+              <!-- Modal Driver_Code -->
+  <div class="modal fade" id="driverChangeModel">
+    <div class="modal-dialog">
+      <div class="modal-content bg-success">
+        <div class="modal-header">
+          <h4 class="modal-title">Change DriverCode</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" action="javascript:void(0)">
+            {% csrf_token %}
+            <div class="form-group">
+               <input type="hidden" value="" id="edittaskid">
+               <select class="form-control textinput_css" id="driverselectlist" >
+                  {% for data in driver1 %}
+                  <option value="{{data.id}}">{{data.id}}</option>
+                  {% endfor %}
+               </select>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline-light driver-code-change" data-dismiss="modal">OK</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <!-- /.modal -->
+        </div>
+    </div>
+</div>
+<script src="{% static 'assets/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/bower_components/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/bower_components/jquery/dist/jquery.min.js'%}"></script>
+<script src="{% static 'assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--script for editing preference number-->
+<script>
+$(".datareference").click(function(){
+    $("#edittaskid1").val($(this).attr('data-idref'));})
+</script>
+<!--script for editing driver change number-->
+<script>
+  $(".driverChangebtn").click(function(){
+      $("#edittaskid").val($(this).attr('data-id'));
+      $('#driverChangeModel').modal({backdrop: 'static', keyboard: false})
+  })
+</script>
+<!--script for listing driver number-->
+<script>
+  $(".driver-code-change").click(function(){
+      var id          = $("#edittaskid").val();
+      var driverCode  = $("#driverselectlist").val();
+      location.reload(true);
+      $.ajax({
+        url  : "{% url 'Edit_drivercode' %}",
+        type : 'post',
+        data : {
+          "id"         : id,
+          "driverCode" : driverCode,
+          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        },
+        success:function(data){
+          console.log(data);
+          if(data.status == 0){
+            $("#custom_error_heading_edit").html('Server response');
+            $("#custom_error_messages_edit").html(data.message);
+            $('#alerterrormodal_edit').modal({backdrop: 'static',
+            keyboard: false})
+
+          }else{
+            $("#custom_heading_edit").html('Server response');
+            $("#custom_messages_edit").html(data.message);
+            $('#alertmodal_edit').modal({backdrop: 'static', keyboard: false})
+          }
+        }
+      })
+  })
+</script>
+</body>
+</html>
+{% endblock %}
